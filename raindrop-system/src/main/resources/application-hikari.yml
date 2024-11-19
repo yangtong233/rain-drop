@@ -1,0 +1,12 @@
+#数据配置
+spring:
+  datasource:
+    #hikari连接池配置
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-timeout: 60000
+      auto-commit: off
+    #=========================>>>以上是基础属性<<<==========================#
+

@@ -1,0 +1,28 @@
+<configuration xmlns="http://ch.qos.logback/xml/ns/logback"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ch.qos.logback/xml/ns/logback
+               https://raw.githubusercontent.com/enricopulatzo/logback-XSD/master/src/main/xsd/logback.xsd">
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <appender name="STUOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--控制台的日志格式-->
+            <pattern>%highlight(%d{MM月dd日HH:mm:ss}) ${PID} %clr(%-5level) 👉 %boldYellow([%10thread])  %boldCyan(%logger{20})::%clr(%-5line){magenta}-> %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean" level="DEBUG">
+        <appender-ref ref="STUOUT" />
+    </logger>
+
+    <!--单独设置sql记录器的属性，sql以及sql的子记录器都使用名为SQL_ROLL_FILE的附加器进行日志记录-->
+    <logger name="sql" level="DEBUG">
+        <appender-ref ref="STUOUT" />
+    </logger>
+
+    <!--设置根记录器的属性-->
+    <root level="INFO">
+        <!--开发环境，日志输出到控制台-->
+        <appender-ref ref="STUOUT" />
+    </root>
+</configuration>

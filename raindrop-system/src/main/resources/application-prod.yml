@@ -1,0 +1,54 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /raindrop
+#数据配置
+spring:
+  datasource:
+    #连接基本信息
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/drop?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
+    username: root
+    password: 220600
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  servlet:
+    #multipart文件上传配置
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 500MB
+#mp相关配置
+mybatis-plus:
+  global-config:
+    banner: false
+  configuration:
+    log-impl: org.raindrop.core.mp.log.LogbackImpl
+  #到指定的路径下去扫描mapper.xml文件，如果xml文件和mapper接口放在一个包下，则无需该配置
+  mapper-locations: classpath*:org/raindrop/**/mapper/xml/*.xml
+
+#knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+#dev环境使用输出到控制台的日志
+logging:
+  config: classpath:log/logback-dev.xml
+
+#本系统相关配置
+drop:
+  version: 1.0
+  auth:
+    enable: true
+    time-out: 600
+  cache:
+    type: local
+  storage:
+    type: org.raindrop.core.storage.impl.LocalFileStorageServiceI
+    max: 100MB
+    config:
+      path: "file-storage/"

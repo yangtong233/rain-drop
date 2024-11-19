@@ -1,0 +1,29 @@
+## springboot
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# Maven target directory
+target/
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA project files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# NetBeans project files
+nbproject/
+build/
+nbbuild/
+dist/
+nbdist/
+
+file-storage/

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>raindrop-parent</artifactId>
+        <groupId>org.raindrop</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>raindrop-system</artifactId>
+    <packaging>jar</packaging>
+    <description>业务模块，导入了raindrop-core，也可以另起一个模块导入raindrop-core作为业务模块</description>
+    <name>${project.name}</name>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.raindrop</groupId>
+            <artifactId>raindrop-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!--项目打包后的名字-->
+        <finalName>${project.name}</finalName>
+        <plugins>
+            <!--该插件能使boot项目打包时，自动将启动类设为jar的主清单属性-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${boot.version}</version>
+                <configuration>
+                    <!-- 如果没有该配置，devtools不会生效 -->
+                    <!--<fork>true</fork>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>22</source>
+                    <target>22</target>
+                    <compilerArgs>--enable-preview</compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
