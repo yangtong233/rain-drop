@@ -5,7 +5,7 @@ import java.io.OutputStream;
 /**
  * created by yangtong on 2024/6/6 下午12:51
  *
- * @Description: Excel文件写入接口
+ *  Excel文件写入接口
  */
 public interface IExcelWriter {
 

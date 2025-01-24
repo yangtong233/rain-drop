@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.raindrop.common.enums.FileType;
 import org.raindrop.common.utils.bean.Beans;
 import org.raindrop.common.utils.excel.support.TemplateFormExcelWriter;
-import org.raindrop.common.utils.excel.support.TemplateTableExcelWriter;
+import org.raindrop.common.utils.excel.support.TemplateTableExcelPlaceholderWriter;
 import org.raindrop.common.utils.excel.support.TableExcelWriter;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class ExcelsTest {
         data.add(Map.of("fkfs", "233反馈", "wjmc", true, "djh", 4234, "lxdh", "联系方式3", "sfz", "身份证3", "fkr", "反馈人3", "jzks", "眼科"));
         data.add(Map.of("fkfs", "强迫反馈", "wjmc", true, "djh", 4444, "lxdh", "联系方式4", "sfz", "身份证4", "fkr", "反馈人4", "jzks", "肛肠科"));
         //将数据写到桌面的文件中
-        TemplateTableExcelWriter.builder()
+        TemplateTableExcelPlaceholderWriter.builder()
                 .from("template\\投诉管理导出模板.xlsx")
                 .with(data)
                 .to(path + "testTableExcelWithTemplate.xlsx")

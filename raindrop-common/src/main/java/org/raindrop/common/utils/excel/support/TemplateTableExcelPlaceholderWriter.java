@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 基于模板的表格型excel创建类
+ * 基于模板和占位符的表格型excel创建类
  */
-public class TemplateTableExcelWriter implements IExcelWriter {
+public class TemplateTableExcelPlaceholderWriter implements IExcelWriter {
 
     /**
      * 模板文件输入流
@@ -36,12 +36,12 @@ public class TemplateTableExcelWriter implements IExcelWriter {
      */
     private OutputStream targetStream;
 
-    private TemplateTableExcelWriter() {
+    private TemplateTableExcelPlaceholderWriter() {
     }
 
     //开始构建
-    public static TemplateTableExcelWriter builder() {
-        return new TemplateTableExcelWriter();
+    public static TemplateTableExcelPlaceholderWriter builder() {
+        return new TemplateTableExcelPlaceholderWriter();
     }
 
     /**
@@ -51,7 +51,7 @@ public class TemplateTableExcelWriter implements IExcelWriter {
      * @return 当前对象
      */
     @Override
-    public TemplateTableExcelWriter from(String classPath) {
+    public TemplateTableExcelPlaceholderWriter from(String classPath) {
         //获取文件流
         templateStream = this.getClass().getClassLoader().getResourceAsStream(classPath);
         return this;
@@ -63,7 +63,7 @@ public class TemplateTableExcelWriter implements IExcelWriter {
      * @param data map表示每一行，map的键值对表示该行的列
      * @return 当前对象
      */
-    public TemplateTableExcelWriter with(List<Map<String, Object>> data) {
+    public TemplateTableExcelPlaceholderWriter with(List<Map<String, Object>> data) {
         this.data = data;
         return this;
     }
@@ -74,7 +74,7 @@ public class TemplateTableExcelWriter implements IExcelWriter {
      * @param targetPath 目标文件的路径
      * @return 当前对象
      */
-    public TemplateTableExcelWriter to(String targetPath) {
+    public TemplateTableExcelPlaceholderWriter to(String targetPath) {
         if (targetPath == null) {
             throw new BaseException("目标文件路径不能为空");
         }
@@ -91,7 +91,7 @@ public class TemplateTableExcelWriter implements IExcelWriter {
      *
      * @param targetFile 目标文件
      */
-    public TemplateTableExcelWriter to(File targetFile) {
+    public TemplateTableExcelPlaceholderWriter to(File targetFile) {
         if (targetFile == null) {
             throw new BaseException("目标文件不能为空");
         }
@@ -109,7 +109,7 @@ public class TemplateTableExcelWriter implements IExcelWriter {
      * @param targetStream 输出流
      */
     @Override
-    public TemplateTableExcelWriter to(OutputStream targetStream) {
+    public TemplateTableExcelPlaceholderWriter to(OutputStream targetStream) {
         if (targetStream == null) {
             throw new BaseException("目标文件输出流不能为空");
         }

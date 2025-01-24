@@ -21,6 +21,7 @@ import java.util.Map;
 
 /**
  * 直接基于数据的表格型excel创建类
+ * excel使用默认样式
  */
 public class TableExcelWriter implements IExcelWriter {
 

@@ -9,12 +9,11 @@ import org.raindrop.common.annos.Marker;
 import org.raindrop.common.enums.FileType;
 import org.raindrop.common.exception.BaseException;
 import org.raindrop.common.utils.bean.Beans;
-import org.raindrop.common.utils.excel.support.TableExcelWriter;
-import org.raindrop.common.utils.excel.support.TemplateFormExcelWriter;
-import org.raindrop.common.utils.excel.support.TemplateTableExcelWriter;
+import org.raindrop.common.utils.excel.support.*;
 import org.raindrop.common.utils.string.Strs;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -198,7 +197,58 @@ public class Excels {
      * @param data         数据
      */
     public static void doWrite(String templatePath, List<Map<String, Object>> data, OutputStream os) {
-        TemplateTableExcelWriter.builder().from(templatePath).with(data).to(os).doWrite();
+        TemplateTableExcelPlaceholderWriter.builder().from(templatePath).with(data).to(os).doWrite();
+    }
+
+    /**
+     * 从指定行指定列向指定模板写入数据
+     *
+     * @param templatePath 模板文件路径
+     * @param startRow     从模板第几行写入
+     * @param startCol     从模板第几列写入
+     * @param data         写入的数据
+     * @param os           输出流
+     */
+    public static void doWrite(String templatePath, Integer startRow, Integer startCol, List<List<Object>> data, OutputStream os) {
+        TemplateTableExcelNonPlaceholderWriter.builder()
+                .from(templatePath)
+                .startRow(startRow)
+                .startCol(startCol)
+                .with(data)
+                .to(os)
+                .doWrite();
+    }
+
+    /**
+     * 读取Excel并转为数组
+     * 从Excel的第零行第零列开始读，将每一行的单元格以此顺序赋值给target类型的字段，期间会发生类型转换
+     *
+     * @param source Excel文件流
+     * @param target 每一行转为指定类型
+     * @param <T>    类型参数
+     * @return 数组
+     */
+    public static <T> List<T> read(InputStream source, Class<T> target) {
+        List<T> result = new ArrayList<>();
+        TableExcelReader.<T>builder().from(new BufferedInputStream(source)).to(target, result).doRead();
+        return result;
+    }
+
+    /**
+     * 读取Excel并转为数组
+     * 从Excel的指定行指定列开始读，将每一行的单元格以此顺序赋值给target类型的字段，期间会发生类型转换
+     *
+     * @param source   Excel文件流
+     * @param startRow 起始行
+     * @param startCol 起始列
+     * @param target   每一行转为指定类型
+     * @param <T>      类型参数
+     * @return 数组
+     */
+    public static <T> List<T> read(InputStream source, int startRow, int startCol, Class<T> target) {
+        List<T> result = new ArrayList<>();
+        TableExcelReader.<T>builder().from(new BufferedInputStream(source)).to(target, result).doRead(startRow, startCol);
+        return result;
     }
 
     /**
@@ -212,6 +262,9 @@ public class Excels {
         Workbook workbook;
         try {
             //根据流获取文件类型，不会关闭流
+            if (!(is instanceof BufferedInputStream)) {
+                is = new BufferedInputStream(is);
+            }
             FileType fileType = FileType.getFileType(is);
             //根据流推断文件类型，并创建不同的Workbook实现类
             if (fileType.equals(FileType.XLS)) {
