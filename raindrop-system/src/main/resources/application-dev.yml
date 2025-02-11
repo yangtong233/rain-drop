@@ -43,7 +43,7 @@ logging:
 drop:
   version: 1.0
   auth:
-    enable: true
+    enable: false
     time-out: 600
   cache:
     type: local

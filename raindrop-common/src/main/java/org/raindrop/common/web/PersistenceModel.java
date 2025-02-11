@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,4 +40,10 @@ public class PersistenceModel {
     /**更新人*/
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
+
+    /**
+     * 创建人所属部门
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private String departCode;
 }

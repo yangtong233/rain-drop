@@ -1,21 +1,45 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 127.0.0.1
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 80031 (8.0.31)
+ Source Server Version : 80030 (8.0.30)
  Source Host           : localhost:3306
  Source Schema         : drop
 
  Target Server Type    : MySQL
- Target Server Version : 80031 (8.0.31)
+ Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 31/05/2024 12:47:16
+ Date: 11/02/2025 22:46:38
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for sys_depart
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_depart`;
+CREATE TABLE `sys_depart`  (
+                               `id` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '部门id',
+                               `pid` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '父id',
+                               `depart_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '部门名称',
+                               `depart_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '部门编码',
+                               `status` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '状态',
+                               `sort` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL COMMENT '排序',
+                               `remark` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '备注',
+                               `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                               `create_by` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建人id',
+                               `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+                               `update_by` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '修改人',
+                               PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '系统用户表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_depart
+-- ----------------------------
+INSERT INTO `sys_depart` VALUES ('1889324692846141441', '-1', '主管部门1', NULL, '', NULL, '', '2025-02-11 22:44:43', '测试添加人', '2025-02-11 22:44:43', '测试更新人');
 
 -- ----------------------------
 -- Table structure for sys_dept
@@ -66,6 +90,25 @@ CREATE TABLE `sys_dict`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for sys_err_log
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_err_log`;
+CREATE TABLE `sys_err_log`  (
+                                `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '注解id',
+                                `class_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '错误发生的类名',
+                                `method_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '错误发生的方法名',
+                                `err_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '错误类型',
+                                `err_message` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '错误提示',
+                                `err_detail` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL COMMENT '错误堆栈信息',
+                                `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '系统错误日志' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_err_log
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for sys_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_permission`;
@@ -97,7 +140,7 @@ INSERT INTO `sys_permission` VALUES ('1795733840586289154', '5', 1, '缓存管�
 INSERT INTO `sys_permission` VALUES ('2', '1', 1, '用户管理', 'User', '/rabc/user', '/view/rabc/user/index.vue', b'1', 'User', NULL, 0, NULL, NULL, NULL, '2024-05-29 10:58:26', '测试更新人');
 INSERT INTO `sys_permission` VALUES ('3', '1', 1, '角色管理', 'Role', '/rabc/role', '/view/rabc/role/index.vue', b'1', 'UserFilled', NULL, 0, NULL, NULL, NULL, '2024-05-29 10:58:39', '测试更新人');
 INSERT INTO `sys_permission` VALUES ('4', '1', 1, '资源管理', 'Permission', '/rabc/permission', '/view/rabc/permission/index.vue', b'1', 'School', NULL, 0, NULL, NULL, NULL, '2024-05-29 10:58:45', '测试更新人');
-INSERT INTO `sys_permission` VALUES ('5', '0', 1, '工具', 'Tools', '/tools', '/layout/index.vue', b'1', 'Tools', NULL, 0, NULL, NULL, NULL, '2023-06-22 22:39:03', '测试更新人');
+INSERT INTO `sys_permission` VALUES ('5', '0', 1, '工具123', 'Tools', '/tools', '/layout/index.vue', b'1', 'Tools', NULL, 0, NULL, NULL, NULL, '2023-06-22 22:39:03', '测试更新人');
 INSERT INTO `sys_permission` VALUES ('6', '5', 1, '数据字典', 'Dict', '/tools/dict', '/view/tool/dict/index.vue', b'1', 'Tools', NULL, 2, NULL, NULL, NULL, '2023-06-05 20:48:13', '测试更新人');
 INSERT INTO `sys_permission` VALUES ('7', '5', 1, '数据库管理', 'Db', '/tools/db', '/view/tool/db/index.vue', b'1', 'Tools', NULL, 3, '数据库在线管理', '2023-10-21 14:52:24', '测试添加人', '2023-06-05 20:48:13', '测试更新人');
 INSERT INTO `sys_permission` VALUES ('8', '5', 1, '接口文档', 'Doc', '/tools/doc', '/view/tool/doc/index.vue', b'1', 'Tools', NULL, 4, NULL, '2023-10-21 14:52:24', '测试添加人', '2023-06-05 20:48:13', '测试更新人');
@@ -206,6 +249,27 @@ CREATE TABLE `sys_user`  (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', '1', '杨桐', '\r\nhttp://localhost:8888/raindrop/sys/file/download?fileId=2024-04-13%234k%20%E9%95%BF%E8%BE%AB%E5%AD%90%E5%A5%B3%E5%AD%A9%20%E8%80%B3%E7%8E%AF%20%E4%BE%A7%E8%84%B8%20%E5%94%AF%E7%BE%8E%20%E6%A2%85%E8%8A%B1%20%E7%BA%A2%E8%89%B2%E8%83%8C%E5%BD%B1%20%E5%8E%9A%E6%B6%82%E5%8A%A8%E6%BC%AB%20%E9%AB%98%E6%B8%85%E5%A3%81%E7%BA%B8_%E5%BD%BC%E5%B2%B8%E5%9B%BE%E7%BD%91.jpg', '17784722008', 'yt220600@gmail.com', 1, '这是一个小小的管理员!!!', '2023-05-23 22:14:21', '测试添加人', '2023-10-22 14:33:08', '测试更新人');
+
+-- ----------------------------
+-- Table structure for sys_user_depart
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_depart`;
+CREATE TABLE `sys_user_depart`  (
+                                    `id` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '主键id',
+                                    `user_id` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '用户id',
+                                    `depart_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '部门id',
+                                    `remark` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '备注',
+                                    `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                    `create_by` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建人id',
+                                    `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+                                    `update_by` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '修改人',
+                                    PRIMARY KEY (`id`) USING BTREE,
+                                    UNIQUE INDEX `uk_user_id_depart_id`(`user_id` ASC, `depart_id` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '系统用户表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user_depart
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_user_dept

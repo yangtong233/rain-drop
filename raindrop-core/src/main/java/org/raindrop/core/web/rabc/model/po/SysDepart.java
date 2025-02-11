@@ -41,7 +41,7 @@ public class SysDepart extends BaseTree<SysDepart> {
      * 部门序号
      */
     @Schema(description = "部门序号")
-    private String order;
+    private Integer sort;
 
     /**
      * 部门备注

@@ -18,6 +18,8 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
         this.strictUpdateFill(metaObject, "updateTime", LocalDateTime::now, LocalDateTime.class);
         this.strictUpdateFill(metaObject, "updateBy", () -> "测试更新人", String.class);
+
+        this.strictInsertFill(metaObject, "departCode", () -> "A01", String.class);
     }
 
     @Override

@@ -22,5 +22,6 @@ public abstract class BaseTree<T> extends PersistenceModel {
     @TableField(exist = false)
     private String key;
     @Schema(description = "该数据的子数据")
+    @TableField(exist = false)
     private List<T> children;
 }

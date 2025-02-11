@@ -36,8 +36,8 @@ public class PrintUrlOnApplicationStarted implements ApplicationRunner, Applicat
         String path = getString(env.getProperty("server.servlet.context-path"));
         log.info("\n----------------------------------------------------------\n\t" +
                 "Your application is running! Access URLs:\n\t" +
-                "Local: \t\thttp://localhost:" + port + path + "/\n\t" +
-                "External: \thttp://" + ip + ":" + port + path + "/\n\t" +
+                "Local: \t\thttp://localhost:" + port + path + "/doc.html\n\t" +
+                "External: \thttp://" + ip + ":" + port + path + "/doc.html\n\t" +
                 "Swagger文档: http://" + ip + ":" + port + path + "/doc.html\n" +
                 "----------------------------------------------------------");
     }
