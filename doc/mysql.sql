@@ -93,7 +93,7 @@ CREATE TABLE `sys_permission`  (
 -- Records of sys_permission
 -- ----------------------------
 INSERT INTO `sys_permission` VALUES ('1', '0', 1, 'RABC', 'RABC', '/rabc', '/layout/index.vue', b'1', 'Lock', NULL, 0, '基于用户-角色-权限的一系列管理', NULL, NULL, '2023-06-22 22:04:38', '测试更新人');
-INSERT INTO `sys_permission` VALUES ('1795733840586289154', '5', 1, '缓存管理', 'CACHE', '/tools/cache', '/views/tools/cache/index.vue', b'1', 'Tools', NULL, 1, '233', '2024-05-29 16:28:05', '测试添加人', '2024-05-29 16:28:05', '测试更新人');
+INSERT INTO `sys_permission` VALUES ('1795733840586289154', '5', 1, '缓存管理', 'CACHE', '/tools/cache', '/view/tool/cache/index.vue', b'1', 'Tools', NULL, 1, '233', '2024-05-29 16:28:05', '测试添加人', '2024-05-29 16:28:05', '测试更新人');
 INSERT INTO `sys_permission` VALUES ('2', '1', 1, '用户管理', 'User', '/rabc/user', '/view/rabc/user/index.vue', b'1', 'User', NULL, 0, NULL, NULL, NULL, '2024-05-29 10:58:26', '测试更新人');
 INSERT INTO `sys_permission` VALUES ('3', '1', 1, '角色管理', 'Role', '/rabc/role', '/view/rabc/role/index.vue', b'1', 'UserFilled', NULL, 0, NULL, NULL, NULL, '2024-05-29 10:58:39', '测试更新人');
 INSERT INTO `sys_permission` VALUES ('4', '1', 1, '资源管理', 'Permission', '/rabc/permission', '/view/rabc/permission/index.vue', b'1', 'School', NULL, 0, NULL, NULL, NULL, '2024-05-29 10:58:45', '测试更新人');
